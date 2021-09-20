@@ -14,10 +14,11 @@ const listItemSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    // start: {
-    //     type: Date,
-    //     required: true,
-    // },
+    start: {
+        type: Date,
+        required: true,
+        default: new Date(),
+    },
     // end: {
     //     type: Date,
     //     required: true,
