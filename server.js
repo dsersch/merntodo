@@ -9,6 +9,8 @@ const DB = process.env.DATABASE.replace(
     process.env.DATABASE_PASSWORD
 );
 
+const listItemRouter = require('./routes/listItemRouter.js')
+
 
 mongoose.connect(DB, {
     useNewUrlParser: true,
@@ -21,6 +23,8 @@ const app = express();
 
 app.use(morgan('dev'));
 app.use(express.json());
+
+app.use('/items', listItemRouter)
 
 app.listen(PORT, (err) => {
     err || console.log(`Server running on ${PORT}...`)
