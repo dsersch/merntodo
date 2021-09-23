@@ -1,11 +1,12 @@
 const express = require('express')
 const listItemController = require('../controllers/listItemController.js')
+const authController = require('../controllers/authController.js')
 
 const router = express.Router()
 
 router
     .route('/')
-    .get(listItemController.getListItems)
+    .get(authController.protect, listItemController.getListItems)
     .post(listItemController.addListItem)
 
 router

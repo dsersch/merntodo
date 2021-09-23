@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const User = require('../models/User.js');
+const jwt = require('jsonwebtoken');
 
 exports.registerNewUser = async (req, res) => {
     try {
@@ -53,6 +54,47 @@ exports.login = async (req, res) => {
         res.status(400).json({
             status: 'failed',
             message: 'Failed to find that user...',
+        })
+    }
+}
+
+exports.protect = async (req, res, next) => {
+    try {
+        let token;
+        if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
+            token = req.headers.authorization.split(' ')[1];
+        };
+    
+        if (!token) {
+            return res.status(401).json({
+                status: 'failed',
+                message: 'Failed to find token...'
+            })
+        };
+    
+        const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+    
+        if (!decodedToken) {
+            return res.status(400).json({
+                status: 'failed',
+                message: 'Failed to veryify token...'
+            })
+        };
+    
+        const loginUser = await User.findById(decodedToken.id);
+
+        if (!loginUser) {
+            return res.status(401).json({
+                status: 'failed',
+                message: 'User no longer exists...'
+            })
+        }
+    
+        next()
+    } catch (err) {
+        res.status(401).json({
+            status: 'failed',
+            message: 'token validation failed...'
         })
     }
 }
