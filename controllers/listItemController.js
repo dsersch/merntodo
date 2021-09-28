@@ -17,6 +17,22 @@ exports.getListItems = async (req, res) => {
     }
 }
 
+exports.getUserItems = async (req, res) => {
+    try {
+        const userItems = await ListItem.find({ user: req.params.id });
+
+        res.status(200).json({
+            status: 'success',
+            data: userItems,
+        })
+    } catch (err) {
+        res.status(404).json({
+            status: 'failed',
+            message: err
+        })
+    }
+}
+
 exports.addListItem = async (req, res) => {
     try {
         const newListItem = await ListItem.create(req.body);

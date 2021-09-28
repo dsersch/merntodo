@@ -15,4 +15,8 @@ router
     .patch(listItemController.updateListItem)
     .delete(listItemController.deleteListItem)
 
+router
+    .route('/user/:id')
+    .get(listItemController.getUserItems)
+
 module.exports = router;
