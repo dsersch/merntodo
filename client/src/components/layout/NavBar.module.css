@@ -4,6 +4,8 @@
     justify-content: space-between;
     color: white;
     padding: 1rem 3rem;
+    position: absolute;
+    width: 100%;
 }
 
 .nav-bar ul {

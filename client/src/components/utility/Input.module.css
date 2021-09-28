@@ -1,3 +1,18 @@
+.form-element {
+    margin-bottom: 1rem;
+}
+
 .form-element label {
     display: block;
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: .5rem;
+}
+
+.form-element input {
+    width: 100%;
+    padding: .5rem;
+    font-size: 1.25rem;
+    border-radius: 10px;
+    border: none;
 }
