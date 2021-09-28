@@ -1,0 +1,29 @@
+.nav-bar {
+    background-color: #666;
+    display: flex;
+    justify-content: space-between;
+    color: white;
+    padding: 1rem 3rem;
+}
+
+.nav-bar ul {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+}
+
+.nav-bar li {
+    border: 1px solid white;
+    padding: .5rem 2rem;
+    margin-left: 2rem;
+    border-radius: 10px;
+    font-weight: bold;
+    letter-spacing: .07rem;
+    transition: all .3s;
+    cursor: pointer;
+}
+
+.nav-bar li:hover {
+    background-color: white;
+    color: #666;
+}
