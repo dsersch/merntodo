@@ -1,3 +1,10 @@
 .to-do-list {
     padding-top: 7rem;
+    display: flex;
+    justify-content: center;
+}
+
+.to-do-list ul {
+    list-style: none;
+    width: 30rem;
 }

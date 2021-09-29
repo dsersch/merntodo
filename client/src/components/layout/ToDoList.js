@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import classes from './ToDoList.module.css';
 import Card from '../utility/Card'
+import ToDoItem from './ToDoItem';
 
 const ToDoList = (props) => {
     const [ items, setItems ] = useState([])
@@ -14,7 +15,7 @@ const ToDoList = (props) => {
                 }
             })
             const result = await res.json()
-            
+
             if (result.data) {
                 setItems(result.data)
             } else {
@@ -34,7 +35,7 @@ const ToDoList = (props) => {
         <div className={classes['to-do-list']}>
             <Card>
                 {items.map((el)=> {
-                    return <h1 key={el._id}>{el.title}</h1>
+                    return <ToDoItem onDelete={setItems} getItems={getAllItems} data={el}/>
                 })}
             </Card>
         </div>

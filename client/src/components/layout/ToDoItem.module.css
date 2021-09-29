@@ -1,0 +1,25 @@
+.to-do-item {
+    width: 30rem;
+    padding: .5rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    border-radius: 10px;
+    margin-bottom: .5rem;
+}
+
+.to-do-item button {
+    padding: .5rem;
+    font-weight: bold;
+    color: white;
+    background-color: darkred;
+    border:none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all .3s;
+}
+
+.to-do-item button:hover {
+    background-color: red;
+}
