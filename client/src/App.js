@@ -21,7 +21,7 @@ const App = () => {
   return (
     <div className={classes.App}>
       <NavBar login={onGetLoginForm} status={loggingIn} loggedIn={user} logout={logout}/>
-      {!loggingIn && !user && <SignUp signUp={setUser} />}
+      {!loggingIn && !user && <SignUp signup={setUser} />}
       {loggingIn && !user && <Login login={setUser} />}
       {user && <ToDoList userId={user} />}
     </div>

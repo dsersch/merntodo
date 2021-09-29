@@ -7,20 +7,23 @@ const ToDoList = (props) => {
 
     const getAllItems = useCallback(async (req, res) =>{
         try {
-            const res = await fetch('/items', {
+            const res = await fetch(`/items/user/${props.userId}`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
                 }
             })
-            const allItems = await res.json()
-            console.log(allItems)
-            setItems(allItems.data)
-
+            const result = await res.json()
+            
+            if (result.data) {
+                setItems(result.data)
+            } else {
+                console.log(result)
+            }
         } catch(err) {
             console.log(err)
         }
-    }, []);
+    }, [props.userId]);
 
     useEffect(() => {
         getAllItems()

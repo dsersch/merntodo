@@ -17,6 +17,6 @@ router
 
 router
     .route('/user/:id')
-    .get(listItemController.getUserItems)
+    .get(authController.protect, listItemController.getUserItems)
 
 module.exports = router;
