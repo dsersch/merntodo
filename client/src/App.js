@@ -7,18 +7,23 @@ import ToDoList from './components/layout/ToDoList';
 
 const App = () => {
   const [ loggingIn, setLogginIn ] = useState(false);
-  const [ user, setUser ] = useState(true)
+  const [ user, setUser ] = useState(null)
 
   const onGetLoginForm = () => {
     setLogginIn(!loggingIn)
   }
 
+  const logout = () => {
+    localStorage.removeItem('token');
+    setUser(null)
+  }
+
   return (
     <div className={classes.App}>
-      <NavBar login={onGetLoginForm} status={loggingIn} />
-      {!loggingIn && !user && <SignUp />}
-      {loggingIn && !user && <Login />}
-      {user && <ToDoList />}
+      <NavBar login={onGetLoginForm} status={loggingIn} loggedIn={user} logout={logout}/>
+      {!loggingIn && !user && <SignUp signUp={setUser} />}
+      {loggingIn && !user && <Login login={setUser} />}
+      {user && <ToDoList userId={user} />}
     </div>
   );
 }

@@ -10,7 +10,7 @@ const ToDoList = (props) => {
             const res = await fetch('/items', {
                 method: 'GET',
                 headers: {
-                    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNTMyNGRlZjA1ZTZmNmQ5ODk0Mzg0MyIsImlhdCI6MTYzMjgzODg3OCwiZXhwIjoxNjMzNzAyODc4fQ.ypgAEE1o6mOYXFx33pseu6mMVFcpSyyjgo8yIlBbh50'
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
                 }
             })
             const allItems = await res.json()

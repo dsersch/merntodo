@@ -13,7 +13,8 @@ const NavBar = (props) => {
         <nav className={classes['nav-bar']}>
             <h1>Mern ToDo</h1>
             <ul>
-                <li onClick={props.login}>{buttonText}</li>
+                {!props.loggedIn && <li onClick={props.login}>{buttonText}</li>}
+                {props.loggedIn && <li onClick={props.logout}>Log Out</li>}
             </ul>
         </nav>
     )
