@@ -19,6 +19,10 @@ const listItemSchema = new mongoose.Schema({
         required: true,
         default: new Date(),
     },
+    finished: {
+        type: Boolean,
+        default: false,
+    },
     // end: {
     //     type: Date,
     //     required: true,

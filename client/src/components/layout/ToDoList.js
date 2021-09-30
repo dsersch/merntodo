@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import classes from './ToDoList.module.css';
 import Card from '../utility/Card'
 import ToDoItem from './ToDoItem';
+import AddItem from './AddItem';
 
 const ToDoList = (props) => {
     const [ items, setItems ] = useState([])
@@ -30,13 +31,24 @@ const ToDoList = (props) => {
         getAllItems()
     }, [getAllItems])
 
+    let list;
+
+    if (items.length < 1) {
+        list = <h1>No items yet...</h1>
+    } else {
+        list = items.map((el) => {
+            return <ToDoItem key={el._id} onDelete={setItems} getItems={getAllItems} data={el}/>
+        })
+    }
+
 
     return (
         <div className={classes['to-do-list']}>
             <Card>
-                {items.map((el)=> {
-                    return <ToDoItem onDelete={setItems} getItems={getAllItems} data={el}/>
-                })}
+                <AddItem />
+            </Card>
+            <Card>
+                {list}
             </Card>
         </div>
     )

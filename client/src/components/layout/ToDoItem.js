@@ -18,7 +18,7 @@ const ToDoItem = (props) => {
     }
 
     return (
-        <div key={props.data._id} className={classes['to-do-item']}>
+        <div className={classes['to-do-item']}>
             <div>
                 <h1>{props.data.title}</h1>
                 <p>{props.data.description}</p>
