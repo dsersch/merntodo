@@ -7,7 +7,7 @@ const router = express.Router()
 router
     .route('/')
     .get(authController.protect, listItemController.getListItems)
-    .post(listItemController.addListItem)
+    .post(authController.protect, listItemController.addListItem)
 
 router
     .route('/:id')

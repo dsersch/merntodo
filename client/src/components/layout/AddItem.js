@@ -14,9 +14,33 @@ const AddItem = (props) => {
         setEnteredDescription(event.target.value)
     }
 
-    const onFormSubmit = (event) => {
+    const onFormSubmit = async (event) => {
         event.preventDefault()
-        console.log('Add Item clicked...')
+        try {
+            const res = await fetch('/items', {
+                method: 'POST',
+                body: JSON.stringify({
+                    user: props.user,
+                    title: enteredTitle,
+                    description: enteredDescription,
+                }),
+                headers: {
+                    "Authorization": `Bearer ${localStorage.getItem('token')}`,
+                    "Content-type": "application/json",
+                }, 
+            });
+
+            const result = await res.json();
+
+            if (result.status === 'success') {
+                props.getItems()
+            }
+            setEnteredTitle('')
+            setEnteredDescription('')
+        } catch (err) {
+            console.log(err)
+        }
+        
     }
 
     return (

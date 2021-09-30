@@ -45,7 +45,7 @@ const ToDoList = (props) => {
     return (
         <div className={classes['to-do-list']}>
             <Card>
-                <AddItem />
+                <AddItem getItems={getAllItems} user={props.userId}/>
             </Card>
             <Card>
                 {list}
