@@ -9,17 +9,46 @@
     margin-bottom: .5rem;
 }
 
-.to-do-item button {
-    padding: .5rem;
-    font-weight: bold;
-    color: white;
-    background-color: darkred;
-    border:none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all .3s;
+.finished-item {
+    background-color: #666;
+    color: grey;
 }
 
-.to-do-item button:hover {
+.finished-item h1 {
+    text-decoration: line-through;
+    text-decoration-color: red;
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+}
+
+.to-do-item button {
+    padding: .5rem 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    transition: all .3s;
+    height: 2.5rem;
+    width: 2.5rem;
+    color: white;
+}
+
+.delete {
+    margin-left: .5rem;
+    background-color: darkred;
+}
+
+.delete:hover {
     background-color: red;
+}
+
+.finished {
+    background-color: darkgreen;
+}
+
+.finished:hover {
+    background-color: limegreen;
 }
