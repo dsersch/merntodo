@@ -28,7 +28,10 @@ const ToDoItem = (props) => {
     const onDelete = async () => {
         try {
             const res = await fetch(`/items/${props.data._id}`, {
-                method: "DELETE"
+                method: "DELETE",
+                headers: {
+                    "Authorization": `Bearer ${localStorage.getItem('token')}`
+                }
             })
     
             const result = await res.json()

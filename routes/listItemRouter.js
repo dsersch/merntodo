@@ -11,9 +11,9 @@ router
 
 router
     .route('/:id')
-    .get(listItemController.getListItem)
-    .patch(listItemController.updateListItem)
-    .delete(listItemController.deleteListItem)
+    .get(authController.protect, listItemController.getListItem)
+    .patch(authController.protect, listItemController.updateListItem)
+    .delete(authController.protect, listItemController.deleteListItem)
 
 router
     .route('/user/:id')
