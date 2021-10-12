@@ -16,3 +16,8 @@
     border-radius: 10px;
     border: none;
 }
+
+.invalid {
+    background-color: rgb(238, 199, 199);
+    outline: 2px solid red;
+}

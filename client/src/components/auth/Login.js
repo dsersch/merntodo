@@ -1,19 +1,33 @@
-import React, { useState } from 'react';
+import React from 'react';
+import useInput from '../../hooks/use-input';
 import jwtDecode from 'jwt-decode';
 import classes from './Login.module.css';
 import Card from '../utility/Card';
 import Input from '../utility/Input';
 
 const Login = (props) => {
-    const [ enteredEmail, setEnteredEmail ] = useState('');
-    const [ enteredPassword, setEnteredPassword ] = useState('');
+    const {
+        value: enteredEmail,
+        isValid: emailIsValid,
+        hasError: emailHasError,
+        valueChangeHandler: onEmailChange,
+        inputBlurHandler: onEmailBlur,
+        reset: resetEmail,
+     } = useInput(value => value.includes('@'));
 
-    const onEmailChange = (event) => {
-        setEnteredEmail(event.target.value)
-    }
+     const {
+        value: enteredPassword,
+        isValid: passwordIsValid,
+        hasError: passwordHasError,
+        valueChangeHandler: onPasswordChange,
+        inputBlurHandler: onPasswordBlur,
+        reset: resetPassword,
+     } = useInput(value => value.trim().length > 5);
 
-    const onPasswordChange = (event) => {
-        setEnteredPassword(event.target.value)
+    let formIsValid = false;
+
+    if (emailIsValid && passwordIsValid) {
+        formIsValid = true;
     }
 
     const login = async (email, password) => {
@@ -45,7 +59,15 @@ const Login = (props) => {
 
     const onSubmitHandler = (event) => {
         event.preventDefault()
-        login(enteredEmail, enteredPassword)
+        onEmailBlur()
+        onPasswordBlur()
+
+        if (formIsValid) {
+            login(enteredEmail, enteredPassword)
+            resetEmail()
+            resetPassword()
+        }
+        
     }
 
     return (
@@ -53,17 +75,19 @@ const Login = (props) => {
             <Card>
                 <form onSubmit={onSubmitHandler}>
                     <div className={classes.inputs}>
-                        <Input label='Email' settings={{
+                        <Input hasError={emailHasError} label='Email' settings={{
                             id: 'email',
                             type: 'email',
                             value: enteredEmail,
                             onChange: onEmailChange,
+                            onBlur: onEmailBlur,
                         }} />
-                        <Input label='Password' settings={{
+                        <Input hasError={passwordHasError} label='Password' settings={{
                             id: 'password',
                             type: 'password',
                             value: enteredPassword,
                             onChange: onPasswordChange,
+                            onBlur: onPasswordBlur,
                         }} />
                     </div>
                     <div className={classes['form-controls']}>
