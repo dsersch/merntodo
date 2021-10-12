@@ -1,35 +1,55 @@
-import React, { useState } from 'react';
+import React from 'react';
+import useInput from '../../hooks/use-input';
 import jwtDecode from 'jwt-decode';
 import classes from './SignUp.module.css';
 import Card from '../utility/Card'
 import Input from '../utility/Input'
 
 const SignUp = (props) => {
-    const [ enteredUserName, setEnteredUserName ] = useState('');
-    const [ enteredEmail, setEnteredEmail ] = useState('');
-    const [ enteredFirstName, setEnteredFirstName ] = useState('');
-    const [ enteredPassword, setEnteredPassword ] = useState('');
-    const [ enteredConfirmPassword, setEnteredConfirmPassword ] = useState('')
+    const {
+        value: enteredUserName,
+        isValid: userNameIsValid,
+        hasError: userNameHasError,
+        valueChangeHandler: onUserNameChange,
+        inputBlurHandler: onUserNameBlur,
+        reset: resetUserName,
+    } = useInput(value => value.trim().length >= 5);
 
-    const onUserNameChange = (event) => {
-        setEnteredUserName(event.target.value)
-    }
+    const {
+        value: enteredName,
+        isValid: nameIsValid,
+        hasError: nameHasError,
+        valueChangeHandler: onNameChange,
+        inputBlurHandler: onNameBlur,
+        reset: resetName,
+    } = useInput(value => value.trim().length >= 2);
 
-    const onFirstNameChange = (event) => {
-        setEnteredFirstName(event.target.value)
-    }
+    const {
+        value: enteredEmail,
+        isValid: emailIsValid,
+        hasError: emailHasError,
+        valueChangeHandler: onEmailChange,
+        inputBlurHandler: onEmailBlur,
+        reset: resetEmail,
+    } = useInput(value => value.includes('@'));
 
-    const onEmailChange = (event) => {
-        setEnteredEmail(event.target.value)
-    }
+    const {
+        value: enteredPassword,
+        isValid: passwordIsValid,
+        hasError: passwordHasError,
+        valueChangeHandler: onPasswordChange,
+        inputBlurHandler: onPasswordBlur,
+        reset: resetPassword,
+    } = useInput(value => value.trim().length >= 6);
 
-    const onPasswordChange = (event) => {
-        setEnteredPassword(event.target.value)
-    }
-
-    const onConfirmPasswordChange = (event) => {
-        setEnteredConfirmPassword(event.target.value)
-    }
+    const {
+        value: enteredConfirmPassword,
+        isValid: confirmPasswordIsValid,
+        hasError: confirmPasswordHasError,
+        valueChangeHandler: onConfirmPasswordChange,
+        inputBlurHandler: onConfirmPasswordBlur,
+        reset: resetConfirmPassword,
+    } = useInput(value => value.trim().length >= 6);
 
     const signUp = async (data) => {
         try {
@@ -55,20 +75,44 @@ const SignUp = (props) => {
         }
     }
 
+    let formIsValid = false;
+
+    if (userNameIsValid && nameIsValid && emailIsValid && passwordIsValid && confirmPasswordIsValid && (enteredPassword === enteredConfirmPassword)) {
+        formIsValid = true;
+    }
+
     const onSubmitHandler = (event) => {
-        event.preventDefault()
+        event.preventDefault();
+        onUserNameBlur();
+        onNameBlur();
+        onEmailBlur();
+        onPasswordBlur();
+        onConfirmPasswordBlur();
+
         const data = {
             userName: enteredUserName,
-            firstName: enteredFirstName,
+            firstName: enteredName,
             email: enteredEmail,
             password: enteredPassword,
         }
 
         if (enteredPassword !== enteredConfirmPassword) {
+            resetPassword();
+            onPasswordBlur();
+            resetConfirmPassword();
+            onConfirmPasswordBlur();
           return console.log('passwords dont match....')
         } 
 
-        signUp(data)
+        if (formIsValid) {
+            signUp(data);
+            resetUserName();
+            resetName();
+            resetEmail();
+            resetPassword();
+            resetConfirmPassword();
+        }
+
     }
 
     return (
@@ -76,35 +120,40 @@ const SignUp = (props) => {
             <Card>
                 <form onSubmit={onSubmitHandler}>
                     <div className={classes.inputs}>
-                        <Input label='User Name' settings={{
+                        <Input hasError={userNameHasError} label='User Name' settings={{
                             id: 'user-name',
                             type: 'text',
                             value: enteredUserName,
                             onChange: onUserNameChange,
+                            onBlur: onUserNameBlur,
                         }} />
-                        <Input label='First Name' settings={{
+                        <Input hasError={nameHasError} label='First Name' settings={{
                             id: 'first-name',
                             type: 'text',
-                            value: enteredFirstName,
-                            onChange: onFirstNameChange,
+                            value: enteredName,
+                            onChange: onNameChange,
+                            onBlur: onNameBlur,
                         }} />
-                        <Input label='Email' settings={{
+                        <Input hasError={emailHasError} label='Email' settings={{
                             id: 'email',
                             type: 'email',
                             value: enteredEmail,
                             onChange: onEmailChange,
+                            onBlur: onEmailBlur,
                         }} />
-                        <Input label='Password' settings={{
+                        <Input hasError={passwordHasError} label='Password' settings={{
                             id: 'password',
                             type: 'password',
                             value: enteredPassword,
                             onChange: onPasswordChange,
+                            onBlur: onPasswordBlur,
                         }} />
-                        <Input label='Confirm Password' settings={{
+                        <Input hasError={confirmPasswordHasError} label='Confirm Password' settings={{
                             id: 'confirm-password',
                             type: 'password',
                             value: enteredConfirmPassword,
                             onChange: onConfirmPasswordChange,
+                            onBlur: onConfirmPasswordBlur,
                         }} />
                     </div>
                     <div className={classes['form-controls']}>
