@@ -75,14 +75,14 @@ const Login = (props) => {
             <Card>
                 <form onSubmit={onSubmitHandler}>
                     <div className={classes.inputs}>
-                        <Input hasError={emailHasError} label='Email' settings={{
+                        <Input hasError={emailHasError} label='Email' message='Email must contain an @ symbol...' settings={{
                             id: 'email',
                             type: 'email',
                             value: enteredEmail,
                             onChange: onEmailChange,
                             onBlur: onEmailBlur,
                         }} />
-                        <Input hasError={passwordHasError} label='Password' settings={{
+                        <Input hasError={passwordHasError} label='Password' message='Password must be at least 6 characters long...' settings={{
                             id: 'password',
                             type: 'password',
                             value: enteredPassword,

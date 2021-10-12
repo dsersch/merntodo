@@ -112,7 +112,6 @@ const SignUp = (props) => {
             resetPassword();
             resetConfirmPassword();
         }
-
     }
 
     return (
@@ -120,41 +119,61 @@ const SignUp = (props) => {
             <Card>
                 <form onSubmit={onSubmitHandler}>
                     <div className={classes.inputs}>
-                        <Input hasError={userNameHasError} label='User Name' settings={{
-                            id: 'user-name',
-                            type: 'text',
-                            value: enteredUserName,
-                            onChange: onUserNameChange,
-                            onBlur: onUserNameBlur,
-                        }} />
-                        <Input hasError={nameHasError} label='First Name' settings={{
-                            id: 'first-name',
-                            type: 'text',
-                            value: enteredName,
-                            onChange: onNameChange,
-                            onBlur: onNameBlur,
-                        }} />
-                        <Input hasError={emailHasError} label='Email' settings={{
-                            id: 'email',
-                            type: 'email',
-                            value: enteredEmail,
-                            onChange: onEmailChange,
-                            onBlur: onEmailBlur,
-                        }} />
-                        <Input hasError={passwordHasError} label='Password' settings={{
-                            id: 'password',
-                            type: 'password',
-                            value: enteredPassword,
-                            onChange: onPasswordChange,
-                            onBlur: onPasswordBlur,
-                        }} />
-                        <Input hasError={confirmPasswordHasError} label='Confirm Password' settings={{
-                            id: 'confirm-password',
-                            type: 'password',
-                            value: enteredConfirmPassword,
-                            onChange: onConfirmPasswordChange,
-                            onBlur: onConfirmPasswordBlur,
-                        }} />
+                        <Input hasError={userNameHasError}
+                            message='User Name must be at least 5 characters long...'
+                            label='User Name'
+                            settings={{
+                                id: 'user-name',
+                                type: 'text',
+                                value: enteredUserName,
+                                onChange: onUserNameChange,
+                                onBlur: onUserNameBlur,
+                            }}
+                        />
+                        <Input hasError={nameHasError}
+                            message='Name must be at least 2 characters long...'
+                            label='First Name'
+                            settings={{
+                                id: 'first-name',
+                                type: 'text',
+                                value: enteredName,
+                                onChange: onNameChange,
+                                onBlur: onNameBlur,
+                            }}
+                        />
+                        <Input hasError={emailHasError}
+                            message='Email must contain an @ symbol...'
+                            label='Email'
+                            settings={{
+                                id: 'email',
+                                type: 'email',
+                                value: enteredEmail,
+                                onChange: onEmailChange,
+                                onBlur: onEmailBlur,
+                            }} 
+                        />
+                        <Input hasError={passwordHasError} 
+                            message='Password must be at least 6 characters long...'
+                            label='Password' 
+                            settings={{
+                                id: 'password',
+                                type: 'password',
+                                value: enteredPassword,
+                                onChange: onPasswordChange,
+                                onBlur: onPasswordBlur,
+                            }} 
+                        />
+                        <Input hasError={confirmPasswordHasError}
+                            message='Password must be at least 6 characters long...' 
+                            label='Confirm Password' 
+                            settings={{
+                                id: 'confirm-password',
+                                type: 'password',
+                                value: enteredConfirmPassword,
+                                onChange: onConfirmPasswordChange,
+                                onBlur: onConfirmPasswordBlur,
+                            }}
+                        />
                     </div>
                     <div className={classes['form-controls']}>
                         <button type='submit'>Sign Up</button>

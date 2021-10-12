@@ -7,6 +7,7 @@ const Input = (props) => {
         <div className={classes['form-element']}>
             <label htmlFor={props.settings.id}>{props.label}</label>
             <input className={props.hasError ? classes.invalid : ''} {...props.settings}/>
+            {props.hasError && <p>{props.message}</p>}
         </div>
     )
 }

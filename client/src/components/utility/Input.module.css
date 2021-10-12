@@ -18,6 +18,13 @@
 }
 
 .invalid {
-    background-color: rgb(238, 199, 199);
     outline: 2px solid red;
+}
+
+p {
+    background-color: #ffb8b8;
+    border-radius: 5px;
+    padding: .25rem .5rem;
+    color: darkred;
+    font-weight: bold;
 }
